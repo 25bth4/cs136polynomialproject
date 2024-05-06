@@ -6,13 +6,17 @@ import java.util.*;
 public interface Interface<Poly>{
 
 
+	// takes a polynomial and returns the string represetnation
+	public abstract String toString(Poly f);
+
+
 	// takes a polynomial and re-writes it in proper order using Merge Sort Algorithm
 	// Example:  4x^2 + 2x + 8x^3   -->   8x^3 + 4x^2 + 2x
 	public abstract Poly order(Poly f);
 
 
 	// takes a polynomial and checks to see if components may be combined
-	// Example: 5x^3 + 4x^2 + x^3 + 2x   -->   8x^3 + 4x^2 + 2x
+	// Example: 5x^3 + 4x^2 + 3x^3 + 2x   -->   8x^3 + 4x^2 + 2x
 	public abstract Poly reduce(Poly f);
 
 
@@ -43,7 +47,7 @@ public interface Interface<Poly>{
 
 
 	// computes the integral of a polynomial given an intial condition for f(0)
-	public abstract Poly integrate(Poly f, int f0);
+	public abstract Poly integrate(Poly f, float f0);
 
 
 

@@ -39,7 +39,7 @@ public class Poly{
 		this.coefficients = coefficients;
 		this.exponents = exponents;
 	}
-	public ArrayList<float[]> Polynomial(){
+	public ArrayList<float[]> getPoly(){
 		return this.info;
 	}
 	public ArrayList<Float> getCoeffs(){
