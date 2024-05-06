@@ -30,9 +30,8 @@ public class TestPolys {
 		}
 		System.out.println(result);
 
-
-
 		System.out.println(f.toString());
+
 
 
 

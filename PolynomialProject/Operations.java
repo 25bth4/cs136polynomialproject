@@ -100,6 +100,12 @@ public class Operations implements Interface<Poly>{
 
 
 
+	public static void main(String args[]){
+
+	}
+
+
+
 }
 
 
