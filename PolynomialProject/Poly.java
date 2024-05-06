@@ -11,7 +11,7 @@ public class Poly{
 	private ArrayList<Float> exponents;
 
 	// takes a polynomial inputted as a string in returns arraylist<int[]>
-	// example: +5x7 +4x8 -3x-4
+	// example: +5x^7 +4x^8 -3x^-4
 	public Poly(String polynomial){
 	
 		ArrayList<float[]> info = new ArrayList<float[]>();
@@ -23,7 +23,7 @@ public class Poly{
 		for (int i=0; i< array.length; i++){
 			String[] subArray = array[i].split("x");
 			float coefficient = Float.valueOf(subArray[0]);
-			float exponent = Float.valueOf(subArray[1]);
+			float exponent = Float.valueOf(subArray[1].substring(1,subArray[1].length()));
 			
 			coefficients.add(coefficient);
 			exponents.add(exponent);
