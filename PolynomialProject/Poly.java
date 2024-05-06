@@ -6,29 +6,29 @@ import java.util.*;
 
 
 public class Poly{
-	private ArrayList<int[]> info;
-	private ArrayList<Integer> coefficients;
-	private ArrayList<Integer> exponents;
+	private ArrayList<float[]> info;
+	private ArrayList<Float> coefficients;
+	private ArrayList<Float> exponents;
 
 	// takes a polynomial inputted as a string in returns arraylist<int[]>
 	// example: +5x7 +4x8 -3x-4
 	public Poly(String polynomial){
 	
-		ArrayList<int[]> info = new ArrayList<int[]>();
-		ArrayList<Integer> coefficients = new ArrayList<Integer>();
-		ArrayList<Integer> exponents = new ArrayList<Integer>();
+		ArrayList<float[]> info = new ArrayList<float[]>();
+		ArrayList<Float> coefficients = new ArrayList<Float>();
+		ArrayList<Float> exponents = new ArrayList<Float>();
 
 		String[] array = polynomial.split(" ");
 
 		for (int i=0; i< array.length; i++){
 			String[] subArray = array[i].split("x");
-			int coefficient = Integer.valueOf(subArray[0]);
-			int exponent = Integer.valueOf(subArray[1]);
+			float coefficient = Float.valueOf(subArray[0]);
+			float exponent = Float.valueOf(subArray[1]);
 			
 			coefficients.add(coefficient);
 			exponents.add(exponent);
 			
-			int[] combined = new int[2];
+			float[] combined = new float[2];
 			combined[0] = coefficient;
 			combined[1] = exponent;
 			
@@ -39,19 +39,19 @@ public class Poly{
 		this.coefficients = coefficients;
 		this.exponents = exponents;
 	}
-	public ArrayList<int[]> Polynomial(){
+	public ArrayList<float[]> Polynomial(){
 		return this.info;
 	}
-	public ArrayList<Integer> getCoeffs(){
+	public ArrayList<Float> getCoeffs(){
 		return this.coefficients;
 	}
-	public ArrayList<Integer> getExpos(){
+	public ArrayList<Float> getExpos(){
 		return this.exponents;
 	}
 
 
 }
 
-// javac -d bin PolynomialProject/Poly.java
+// To Compile: javac -d bin PolynomialProject/*
 
 
