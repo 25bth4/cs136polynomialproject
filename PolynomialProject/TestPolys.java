@@ -21,6 +21,13 @@ public class TestPolys {
 	    	System.out.println("What would you like to do? Please type a number: \n1: Find Roots \n2: Differentiate Polynomial \n3: Integrate Polynomial  \n5: Multiply Polynomials \n6: Divide Polynomials \n3: Add polynomials \n4: Subtract Polynomials \n7: reduce polynomial \n9: exit");
 	        String answer = scanner.nextLine();
 	        command = Integer.valueOf(answer);
+	        if (command == 9){
+	        	break;
+	        }
+	        if (command != 9 && command != 1 && command != 2){
+	        	System.out.println("Not implemented yet, sorry\n");
+	        	continue;
+	        }
 	        if (command == 1){
 	        	System.out.println("Input polynomial: (example: 1x^7 +3x^2 -4x^1 -1x^0)");
 	        	String polynomial = scanner.nextLine();
@@ -40,9 +47,6 @@ public class TestPolys {
 	        	answer = scanner.nextLine();
 	        	command = Integer.valueOf(answer);
 	        	continue;
-	        }
-	        if (command == 9){
-	        	break;
 	        }
 	    }
 
