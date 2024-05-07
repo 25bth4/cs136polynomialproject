@@ -13,16 +13,18 @@ public class TestPolys {
 
 		Operations ring = new Operations();
 		
+
+
 		//String testString = "+1x^4 +1x^2 +2x^1";
 		//String testString = "+15x^4 -36x^2 +2x^1";
-		String testString = "+5x^4 -6x^2 +2x^1";
+		//String testString = "+5x^4 -6x^2 +2x^1";
+		String testString = "1x^6 -21x^5 +20.05x^4 +3x^3 -.25x^2 +4x^1 -12x^0";
 		Poly f = new Poly(testString);
 
-		System.out.println("Input string is: " + testString);
+		System.out.println(ring.strRoots(f));
 
-		System.out.println("Derivative is: " + ring.diff(f).toString());
 
-		System.out.println("Roots are: " + String.valueOf(ring.roots(f)));
+
 
 
 
