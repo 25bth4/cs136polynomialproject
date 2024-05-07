@@ -9,12 +9,12 @@ public interface Interface<Poly>{
 
 	// takes a polynomial and re-writes it in proper order using Merge Sort Algorithm
 	// Example:  4x^2 + 2x + 8x^3   -->   8x^3 + 4x^2 + 2x
-	public abstract Poly order(Poly f);
+	public abstract void order(Poly f);
 
 
 	// takes a polynomial and checks to see if components may be combined
 	// Example: 5x^3 + 4x^2 + 3x^3 + 2x   -->   8x^3 + 4x^2 + 2x
-	public abstract Poly reduce(Poly f);
+	public abstract void reduce(Poly f);
 
 
 	// takes two polynomials and returns the sum

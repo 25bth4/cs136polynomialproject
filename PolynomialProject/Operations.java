@@ -9,31 +9,96 @@ public class Operations implements Interface<Poly>{
 
 	// takes a polynomial and re-writes it in proper order using Merge Sort Algorithm
 	// Example:  4x^2 + 2x + 8x^3   -->   8x^3 + 4x^2 + 2x
-	public Poly order(Poly f){
-		f = reduce(f);
+	public void order(Poly f){
+		ArrayList<float[]> newPoly = mergeSort(f.getPoly());
+		f.getPoly().clear();
+		for (int i=0; i<newPoly.size(); i++){
+			f.getPoly().add(newPoly.get(i));
+		}
+	}
 
-		//code for Merge Sort
+	public ArrayList<float[]> mergeSort(ArrayList<float[]> array){
+		if (array.size() <=1){
+			return array;
+		}
+		int n = array.size();
+		int mid = (int) n/2;
 
-		return f;
+		ArrayList<float[]> left = new ArrayList<float[]>();
+		for (int i=0; i< mid; i++){
+			left.add(array.get(i));
+		}
+		ArrayList<float[]> right = new ArrayList<float[]>();
+		for (int i=mid; i< n; i++){
+			right.add(array.get(i));
+		}
+
+		left = mergeSort(left);
+		right = mergeSort(right);
+
+		return merge(left, right);
+	}
+
+
+	public ArrayList<float[]> merge(ArrayList<float[]> left, ArrayList<float[]> right){
+		ArrayList<float[]> result = new ArrayList<float[]>();
+		int leftIndex = 0;
+		int rightIndex = 0;
+
+		while (leftIndex< left.size() && rightIndex < right.size()){
+			if (left.get(leftIndex)[1] > right.get(rightIndex)[1]){
+				result.add(left.get(leftIndex));
+				leftIndex += 1;
+			}
+			else {
+				result.add(right.get(rightIndex));
+				rightIndex += 1;
+			}
+		}
+		while (leftIndex < left.size()){
+			result.add(left.get(leftIndex));
+			leftIndex += 1;
+		}
+		while (rightIndex < right.size()){
+			result.add(right.get(rightIndex));
+			rightIndex += 1;
+		}
+		return result;
+
 	}
 
 
 	// takes a polynomial and checks to see if components may be combined
 	// Example: 5x^3 + 4x^2 + 3x^3 + 2x   -->   8x^3 + 4x^2 + 2x
 	public void reduce(Poly f){
-		return null;
+		//First order f, then reduce it.
+		order(f);
+		int n = f.getPoly().size();
+		float prevexpo = f.getPoly().get(0)[1];
+
+		for (int i=1; i<n; i++){
+			if (prevexpo == f.getPoly().get(i)[1]){
+				f.getPoly().get(i-1)[0] += f.getPoly().get(i)[0];
+				f.getPoly().remove(i);
+				n -= 1;
+				i -=1;
+			}
+			else{
+				prevexpo = f.getPoly().get(i)[1];
+			}
+		}
+
+
 	}
 
 
 	// takes two polynomials and returns the sum
 	public Poly add(Poly f, Poly g){
 
-		/*String newString = f.toString() + " " + g.toString();
+		String newString = f.toString() + g.toString();
 		Poly newPoly = new Poly(newString);
 		reduce(newPoly);
-
-		return newPoly;*/
-		return null;
+		return newPoly;
 	}
 
 
