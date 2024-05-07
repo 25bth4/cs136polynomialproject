@@ -97,6 +97,7 @@ public class Operations implements Interface<Poly>{
 
 		String newString = f.toString() + g.toString();
 		Poly newPoly = new Poly(newString);
+		// reduce begins by ordering the polynomial, so we don't have to call both.
 		reduce(newPoly);
 		return newPoly;
 	}
