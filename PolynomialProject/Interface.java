@@ -5,8 +5,6 @@ import java.util.*;
 
 public interface Interface<Poly>{
 
-
-
 	// takes a polynomial and re-writes it in proper order using Merge Sort Algorithm
 	// Example:  4x^2 + 2x + 8x^3   -->   8x^3 + 4x^2 + 2x
 	public abstract void order(Poly f);
@@ -47,15 +45,14 @@ public interface Interface<Poly>{
 	public abstract Poly integrate(Poly f, float f0);
 
 
-
-	// determines approxiamte x-values of relative maxima and minima		** these 3 will be challenging **
-//	public abstract ArrayList<Float> extrema(Poly f);
-
-	// uses extrema(f) to determine number of roots and a window to numerically approximate them
-//	public abstract ArrayList<float[]> windowRoots(Poly f);
-
 	// uses extrema(f) and numRoots to approximate the roots using Newton's method
-//	public abstract ArrayList<Float> roots(Poly f);
+	public abstract ArrayList<Float> roots(Poly f);
+
+	// plot a set of polynomials on a graph in different colors
+	public abstract void graph(ArrayList<Poly> functions);
+
+	// produces a minimal polynomial with specified roots
+	public abstract Poly findPolynomial(ArrayList<Float> roots);
 
 
 }

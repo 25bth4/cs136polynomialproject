@@ -378,7 +378,16 @@ public class Operations implements Interface<Poly>{
 	}
 
 
+	// plot a set of polynomials on a graph in different colors
+	public void graph(ArrayList<Poly> functions){
 
+	}
+
+
+	// produces a minimal polynomial with specified roots
+	public Poly findPolynomial(ArrayList<Float> roots){
+		return null;
+	}
 
 
 
