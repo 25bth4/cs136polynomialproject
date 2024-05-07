@@ -49,13 +49,14 @@ public interface Interface<Poly>{
 
 
 	// determines approxiamte x-values of relative maxima and minima		** these 3 will be challenging **
-	public abstract float[] extrema(Poly f);
+//	public abstract ArrayList<Float> extrema(Poly f);
 
 	// uses extrema(f) to determine number of roots and a window to numerically approximate them
-	public abstract float[] numRoots(Poly f);
+//	public abstract ArrayList<float[]> windowRoots(Poly f);
 
 	// uses extrema(f) and numRoots to approximate the roots using Newton's method
-	public abstract float[] roots(Poly f);
+//	public abstract ArrayList<Float> roots(Poly f);
+
 
 }
 

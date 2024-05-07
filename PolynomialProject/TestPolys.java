@@ -13,14 +13,20 @@ public class TestPolys {
 
 		Operations ring = new Operations();
 		
-		String testString = "37x^7 -2040x^2 +17x^-3";
+		//String testString = "+1x^4 +1x^2 +2x^1";
+		//String testString = "+15x^4 -36x^2 +2x^1";
+		String testString = "+5x^4 -6x^2 +2x^1";
 		Poly f = new Poly(testString);
 
 		System.out.println("Input string is: " + testString);
 
-		System.out.println("ToString output is: " + f.toString());
-
 		System.out.println("Derivative is: " + ring.diff(f).toString());
+
+		System.out.println("Roots are: " + String.valueOf(ring.roots(f)));
+
+
+
+
 
 
 

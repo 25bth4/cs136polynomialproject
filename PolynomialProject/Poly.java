@@ -7,16 +7,16 @@ import java.util.*;
 
 public class Poly{
 	private ArrayList<float[]> info;
-	private ArrayList<Float> coefficients;
-	private ArrayList<Float> exponents;
+	private ArrayList<Float> extrema;
+	private ArrayList<Float> roots;
 
 	// takes a polynomial inputted as a string in returns arraylist<int[]>
 	// example: +5x^7 +4x^8 -3x^-4
 	public Poly(String polynomial){
 	
 		ArrayList<float[]> info = new ArrayList<float[]>();
-		ArrayList<Float> coefficients = new ArrayList<Float>();
-		ArrayList<Float> exponents = new ArrayList<Float>();
+		ArrayList<Float> extrema = new ArrayList<Float>();
+		ArrayList<Float> roots = new ArrayList<Float>();
 
 		String[] array = polynomial.split(" ");
 
@@ -24,9 +24,6 @@ public class Poly{
 			String[] subArray = array[i].split("x");
 			float coefficient = Float.valueOf(subArray[0]);
 			float exponent = Float.valueOf(subArray[1].substring(1,subArray[1].length()));
-			
-			coefficients.add(coefficient);
-			exponents.add(exponent);
 			
 			float[] combined = new float[2];
 			combined[0] = coefficient;
@@ -36,8 +33,8 @@ public class Poly{
 		}
 
 		this.info = info;
-		this.coefficients = coefficients;
-		this.exponents = exponents;
+		this.extrema = extrema;
+		this.roots = roots;
 	}
 
 
@@ -64,11 +61,11 @@ public class Poly{
 	public ArrayList<float[]> getPoly(){
 		return this.info;
 	}
-	public ArrayList<Float> getCoeffs(){
-		return this.coefficients;
+	public ArrayList<Float> getExtrema(){
+		return this.extrema;
 	}
-	public ArrayList<Float> getExponents(){
-		return this.exponents;
+	public ArrayList<Float> getRoots(){
+		return this.roots;
 	}
 
 
