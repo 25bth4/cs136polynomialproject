@@ -302,7 +302,7 @@ public class Operations implements Interface<Poly>{
 		if (zeros.size() == 0){
 			return "This polynomial has no roots.";
 		}
-		return "Roots of "+ f.toString() + " are: " +zeros.toString();
+		return "Roots of "+ f.toString() + " are: \n" +zeros.toString();
 
 	}
 
