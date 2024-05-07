@@ -73,16 +73,11 @@ public class TestPolys {
 		System.out.println(f.toString());
 */
 
-
-
-
-
-
-
-
-
-
-
+        Poly testPoly1 = new Poly("3x^2 -6x^1 +3x^0");
+        Poly testPoly2 = new Poly("2x^3 +9x^1 -20x^0");
+        System.out.println(ring.add(testPoly1, testPoly2).toString());
+        System.out.println(ring.subtract(testPoly1, testPoly2).toString());
+        System.out.println(ring.multiply(testPoly1, testPoly2).toString());
 	}
 
 

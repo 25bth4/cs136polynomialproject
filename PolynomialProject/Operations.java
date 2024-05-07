@@ -105,13 +105,43 @@ public class Operations implements Interface<Poly>{
 
 	// takes two polynomials and returns the difference
 	public Poly subtract(Poly f, Poly g){
-		return null;
+		Poly temp = new Poly(g.toString());
+		for (int i = 0; i < temp.getPoly().size(); i++){
+			temp.getPoly().get(i)[0] = 0 - temp.getPoly().get(i)[0];
+		}
+
+		return add(f, temp);
 	}
 
 
 	// takes two polynomials and returns the product
 	public Poly multiply(Poly f, Poly g){
-		return null;
+
+		ArrayList<float[]> traverse = f.getPoly();
+
+		// initialize return polynomial
+		Poly newPoly = new Poly("0x^0");
+
+		
+
+		for(int i = 0; i < traverse.size(); i++){
+			// values for multiplication
+			float coeff = traverse.get(i)[0];
+			float expon = traverse.get(i)[1];
+
+			// temporary polynomial cloned from g
+			Poly temp = new Poly(g.toString());
+			int tempSize = temp.getPoly().size();
+
+			// multiply each part of g by the selected part of f
+			for (int j = 0; j < tempSize; j++){
+				temp.getPoly().get(j)[0] = temp.getPoly().get(j)[0] * coeff;
+				temp.getPoly().get(j)[1] += expon;
+			}
+			newPoly = add(temp, newPoly);
+		}
+
+		return newPoly;
 	}
 
 
