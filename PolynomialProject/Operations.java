@@ -20,13 +20,19 @@ public class Operations implements Interface<Poly>{
 
 	// takes a polynomial and checks to see if components may be combined
 	// Example: 5x^3 + 4x^2 + 3x^3 + 2x   -->   8x^3 + 4x^2 + 2x
-	public Poly reduce(Poly f){
+	public void reduce(Poly f){
 		return null;
 	}
 
 
 	// takes two polynomials and returns the sum
 	public Poly add(Poly f, Poly g){
+
+		/*String newString = f.toString() + " " + g.toString();
+		Poly newPoly = new Poly(newString);
+		reduce(newPoly);
+
+		return newPoly;*/
 		return null;
 	}
 
