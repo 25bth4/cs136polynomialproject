@@ -146,9 +146,21 @@ public class Operations implements Interface<Poly>{
 
 
 	// computes f/g = h + r, where r is the remainder following the division algorithm
-	// returns h and r
-	public Poly divide(Poly f, Poly g){
-		return null;
+	// The output is formatted as an array [h, r]
+	// assume f is of equal or higher degree than g
+	public Poly[] divide(Poly f, Poly g){
+
+		Poly[] output = new Poly[2];
+		/*
+		// must have polynomials in reduced form. This ensures that
+		reduce(f);
+		reduce(g);
+		// temporary polynomial so g is not modified
+		Poly temp = new Poly(g.toString());*/
+
+
+
+		return output;
 	}
 
 

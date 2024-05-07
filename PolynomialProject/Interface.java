@@ -31,7 +31,7 @@ public interface Interface<Poly>{
 
 	// computes f/g = h + r, where r is the remainder following the division algorithm
 	// returns h and r
-	public abstract Poly divide(Poly f, Poly g);
+	public abstract Poly[] divide(Poly f, Poly g);
 
 
 	// checks for largest common factor by the Euclidean Algorithm
