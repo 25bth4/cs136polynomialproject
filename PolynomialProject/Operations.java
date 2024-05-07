@@ -57,6 +57,8 @@ public class Operations implements Interface<Poly>{
 	}	
 
 
+
+
 	public String toString(ArrayList<float[]> info) {
     	String result = "";
 		for (int i=0; i< info.size(); i++){
@@ -75,6 +77,10 @@ public class Operations implements Interface<Poly>{
 		return result;
     }
 
+
+
+
+
 	// computes the derivative of a polynomial
 	public Poly diff(Poly f){
 	//	f = order(f);
@@ -92,6 +98,11 @@ public class Operations implements Interface<Poly>{
 	}
 
 
+
+
+
+
+
 	// computes the integral of a polynomial given an intial condition for f(0)
 	public Poly integrate(Poly f, float f0){
 		return null;
@@ -99,23 +110,27 @@ public class Operations implements Interface<Poly>{
 
 
 
+
+
+
+
 	// determines approxiamte x-values of relative maxima and minima		** these 3 will be challenging **
 	public ArrayList<Float> extrema(Poly f){
 //make sure that roots(f) spits out the roots in ascending order (sorted already).
 		ArrayList<Float> extrema = roots(diff(f));
-		System.out.println("extrema: " + extrema.toString());
-		f.getExtrema().clear();
+//		System.out.println("extrema of " + f.toString() + " is " + extrema.toString());
+
 		for (int i=0; i<extrema.size(); i++){
 			f.getExtrema().add(extrema.get(i));
 		}
 
-//A: if (leading coeff >0 && leading exponent even) --> left of first >0, right of last >0
-//B: if (leading coeff >0 && leading exponent odd) --> left of first <0, right of last >0
-//C: if (leading coeff <0 && leading exponent even) --> left of first <0, right of last <0
-//D: if (leading coeff <0 && leading exponent odd) --> left of first >0, right of last <0
-
 		return f.getExtrema();
 	}
+
+
+
+
+
 
 
 
@@ -129,11 +144,11 @@ public class Operations implements Interface<Poly>{
 		ArrayList<float[]> windows = new ArrayList<float[]>();
 		
 		float largeNum = 0;
-		for(int i=0; i<f.getPoly().size(); i++){
+	/**	for(int i=0; i<f.getPoly().size(); i++){
 			largeNum = largeNum * f.getPoly().get(i)[0];
 		}
-		largeNum = Math.abs(largeNum)+4;
-		largeNum = 1000;
+		largeNum = Math.abs(largeNum);
+	*/	largeNum = 100000;
 //if f<0 at -infty, and first extrema is positive, then there is a zero before that extrema. similar for last extrema.
 //if two neighboring extrema are of oposite sign, then there is a zero between them.
 		
@@ -167,6 +182,11 @@ public class Operations implements Interface<Poly>{
 		return windows;
 	}
 
+
+
+
+
+
 	// uses extrema(f) and numRoots to approximate the roots using Newton's method
 	public ArrayList<Float> roots(Poly f){
 
@@ -178,21 +198,43 @@ public class Operations implements Interface<Poly>{
 		}
 
 		 ArrayList<float[]> windows = windowRoots(f);
+		
+		 String print = "[";
+		 for (int i=0;i<windows.size();i++){
+		 	print += "[" + String.valueOf(windows.get(i)[0]) + "," + String.valueOf(windows.get(i)[1] + "], ");
+		 }
+		 print+= "]";
+
+//		 System.out.println("Windows of " + f.toString() + " is " + print);
 		 ArrayList<Float> zeros = new ArrayList<Float>();
 		 //Bisection METHOD TO APPROXIMATE THE ROOTS GIVEN THE WINDOWS
 
 //f.getRoots().clear();
-		 for (int i=0; i< windows.size(); i++){
+		for (int i=0; i< windows.size(); i++){
 		 	
 		 	float root = bisectionMethod(windows.get(i)[0],windows.get(i)[1], f, 0);
 		 
 		 	zeros.add(root);
+
 // 	f.getRoots().add(root);
 		 }
-
+//		 System.out.println("Roots of " + f.toString() + " are " + zeros.toString());
+//		 System.out.println("___");
 		 	return zeros;
 //	return f.getRoots();
 	}
+
+	public String strRoots(Poly f){
+		ArrayList<Float> zeros = roots(f);
+
+		if (zeros.size() == 0){
+			return "This polynomial has no roots.";
+		}
+		return "Roots of "+ f.toString() + " are: " +zeros.toString();
+
+	}
+
+
 
 	public float bisectionMethod(float a, float b, Poly f, int count){
 		if (count ==1000) return (a+b)/2;
@@ -202,8 +244,14 @@ public class Operations implements Interface<Poly>{
 		if (evaluate(f, (a+b)/2)/Math.abs(evaluate(f, (a+b)/2)) == evaluate(f, a)/Math.abs(evaluate(f,a)) ){
 			return bisectionMethod((a+b)/2, b, f, count+1);
 		}
-		return bisectionMethod(a, (a+b)/2, f, count +1);
+		if (evaluate(f, (a+b)/2)/Math.abs(evaluate(f, (a+b)/2)) == evaluate(f, b)/Math.abs(evaluate(f,b)) ){
+			return bisectionMethod(a, (a+b)/2, f, count+1);
+		}
+		return (a+b)/2;
 	}
+
+
+
 
 
 
@@ -214,6 +262,9 @@ public class Operations implements Interface<Poly>{
 		}
 		return result;
 	}
+
+
+
 
 
 
