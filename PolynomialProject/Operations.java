@@ -6,28 +6,15 @@ import java.util.*;
 //public class Operations<Poly> implements Interface<Poly>{
 public class Operations implements Interface<Poly>{
 
-	// takes a polynomial and returns the string represetnation
-	public String toString(Poly f){
-		String result = "";
-		for (int i=0; i< f.getPoly().size(); i++){
-			String coeff = String.valueOf(f.getPoly().get(i)[0]);
-			String expon = String.valueOf(f.getPoly().get(i)[1]);
-			if (f.getPoly().get(i)[0]>0) coeff = "+"+coeff;
-			expon = "^"+expon;
-			if (f.getPoly().get(i)[1]==1) result += coeff +"x";
-			else {
-				result += coeff +"x" +expon;
-			}
-			result += " ";
-		}
-		return result;
-	}
-
 
 	// takes a polynomial and re-writes it in proper order using Merge Sort Algorithm
 	// Example:  4x^2 + 2x + 8x^3   -->   8x^3 + 4x^2 + 2x
 	public Poly order(Poly f){
-		return null;
+		f = reduce(f);
+
+		//code for Merge Sort
+
+		return f;
 	}
 
 
@@ -70,9 +57,38 @@ public class Operations implements Interface<Poly>{
 	}	
 
 
+	public String toString(ArrayList<float[]> info) {
+    	String result = "";
+		for (int i=0; i< info.size(); i++){
+
+			String coeff = String.valueOf(info.get(i)[0]);
+			String expon = String.valueOf(info.get(i)[1]);
+
+			if (info.get(i)[0] == (int)info.get(i)[0]) coeff = String.valueOf((int) info.get(i)[0]);
+			if (info.get(i)[1] == (int)info.get(i)[1]) expon = String.valueOf((int) info.get(i)[1]);
+
+			if (info.get(i)[0]>0) coeff = "+"+coeff;
+			expon = "^"+expon;
+			result += coeff +"x" +expon;
+			result += " ";
+		}
+		return result;
+    }
+
 	// computes the derivative of a polynomial
-	public Poly differentiate(Poly f){
-		return null;
+	public Poly diff(Poly f){
+	//	f = order(f);
+		ArrayList<float[]> result = new ArrayList<float[]>();
+		
+		for(int i=0; i<f.getPoly().size(); i++){
+			float[] newArray = new float[2];
+			newArray[0] = f.getPoly().get(i)[0]*f.getPoly().get(i)[1];
+			newArray[1] = f.getPoly().get(i)[1] - 1;
+			result.add(newArray);
+		}
+		Poly fprime = new Poly(toString(result));
+
+		return fprime;
 	}
 
 

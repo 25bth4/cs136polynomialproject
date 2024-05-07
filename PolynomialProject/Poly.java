@@ -39,13 +39,35 @@ public class Poly{
 		this.coefficients = coefficients;
 		this.exponents = exponents;
 	}
+
+
+    public String toString() {
+        
+    	String result = "";
+		for (int i=0; i< info.size(); i++){
+			
+
+			String coeff = String.valueOf(info.get(i)[0]);
+			String expon = String.valueOf(info.get(i)[1]);
+
+			if (info.get(i)[0] == (int)info.get(i)[0]) coeff = String.valueOf((int) info.get(i)[0]);
+			if (info.get(i)[1] == (int)info.get(i)[1]) expon = String.valueOf((int) info.get(i)[1]);
+
+			if (info.get(i)[0]>0) coeff = "+"+coeff;
+			expon = "^"+expon;
+			result += coeff +"x" +expon;
+			result += " ";
+		}
+		return result;
+    }
+
 	public ArrayList<float[]> getPoly(){
 		return this.info;
 	}
 	public ArrayList<Float> getCoeffs(){
 		return this.coefficients;
 	}
-	public ArrayList<Float> getExpos(){
+	public ArrayList<Float> getExponents(){
 		return this.exponents;
 	}
 
@@ -53,5 +75,6 @@ public class Poly{
 }
 
 // To Compile: javac -d bin PolynomialProject/*
+
 
 
