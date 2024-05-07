@@ -71,22 +71,40 @@ public class Operations implements Interface<Poly>{
 	// takes a polynomial and checks to see if components may be combined
 	// Example: 5x^3 + 4x^2 + 3x^3 + 2x   -->   8x^3 + 4x^2 + 2x
 	public void reduce(Poly f){
-		//First order f, then reduce it.
-		order(f);
-		int n = f.getPoly().size();
-		float prevexpo = f.getPoly().get(0)[1];
 
-		for (int i=1; i<n; i++){
-			if (prevexpo == f.getPoly().get(i)[1]){
-				f.getPoly().get(i-1)[0] += f.getPoly().get(i)[0];
-				f.getPoly().remove(i);
-				n -= 1;
-				i -=1;
-			}
-			else{
-				prevexpo = f.getPoly().get(i)[1];
+		// Checks if the polynomial is not zero
+		boolean check = false;
+		for (int i = 0; i < f.getPoly().size(); i++){
+			if (f.getPoly().get(i)[0] != 0.0){
+				check = true;
 			}
 		}
+		
+		if (check){
+			//First order f, then reduce it.
+			order(f);
+			int n = f.getPoly().size();
+			float prevexpo = f.getPoly().get(0)[1];
+
+			for (int i=1; i<n; i++){
+				if (prevexpo == f.getPoly().get(i)[1]){
+					f.getPoly().get(i-1)[0] += f.getPoly().get(i)[0];
+					f.getPoly().remove(i);
+					n -= 1;
+					i -=1;
+				}
+				else{
+					prevexpo = f.getPoly().get(i)[1];
+				}
+			}
+		}
+
+		else{
+			float[] floatArray = {0.0f, 0.0f};
+			f.getPoly().clear();
+			f.getPoly().add(floatArray);
+		}
+		
 
 
 	}
@@ -109,8 +127,10 @@ public class Operations implements Interface<Poly>{
 		for (int i = 0; i < temp.getPoly().size(); i++){
 			temp.getPoly().get(i)[0] = 0 - temp.getPoly().get(i)[0];
 		}
+		Poly output = add(f, temp);
+		reduce(output);
 
-		return add(f, temp);
+		return output;
 	}
 
 
@@ -148,15 +168,31 @@ public class Operations implements Interface<Poly>{
 	// computes f/g = h + r, where r is the remainder following the division algorithm
 	// The output is formatted as an array [h, r]
 	// assume f is of equal or higher degree than g
+
+	public Poly[] divideHelper(Poly f, Poly g, Poly h){
+
+		/*if (g.getPoly().get(0)[1] <= f.getPoly().get(0)[1] && f.getPoly().get(0)[0] != 0){
+			Poly x = new Poly("0x^0")
+			x.getPoly().get(0)[0] =  f.getPoly().get(0)[0]/g.getPoly().get(0)[0];
+			x.getPoly().get(0)[1] = f.getPoly().get(0)[1] - g.getPoly()
+			h.getPoly() = add(h, x);
+			f.getPoly() = f.getPoly() - multiply(g, h);
+		}*/
+
+		Poly[] output = {h, g};
+		return output;
+
+	}
+
 	public Poly[] divide(Poly f, Poly g){
 
 		Poly[] output = new Poly[2];
-		/*
+
 		// must have polynomials in reduced form. This ensures that
 		reduce(f);
 		reduce(g);
 		// temporary polynomial so g is not modified
-		Poly temp = new Poly(g.toString());*/
+		Poly temp = new Poly(f.toString());
 
 
 
