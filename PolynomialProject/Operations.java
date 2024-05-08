@@ -80,7 +80,7 @@ public class Operations implements Interface<Poly>{
 			}
 		}
 		
-		if (check){
+		if (check && f.getPoly().size() >= 2){
 			//First order f, then reduce it.
 			order(f);
 			int n = f.getPoly().size();
@@ -97,13 +97,21 @@ public class Operations implements Interface<Poly>{
 					prevexpo = f.getPoly().get(i)[1];
 				}
 			}
+			for (int i = 0; i < f.getPoly().size(); i++){
+				if (f.getPoly().get(i)[0] == 0.0){
+					f.getPoly().remove(i);
+				}
+			}
 		}
 
-		else{
+
+		else if (!check){
 			float[] floatArray = {0.0f, 0.0f};
 			f.getPoly().clear();
 			f.getPoly().add(floatArray);
 		}
+
+
 		
 
 
@@ -171,32 +179,35 @@ public class Operations implements Interface<Poly>{
 
 	public Poly[] divideHelper(Poly f, Poly g, Poly h){
 
-		/*if (g.getPoly().get(0)[1] <= f.getPoly().get(0)[1] && f.getPoly().get(0)[0] != 0){
-			Poly x = new Poly("0x^0")
+		if (g.getPoly().get(0)[1] <= f.getPoly().get(0)[1] && f.getPoly().get(0)[0] != 0){
+			Poly x = new Poly("0x^0");
 			x.getPoly().get(0)[0] =  f.getPoly().get(0)[0]/g.getPoly().get(0)[0];
-			x.getPoly().get(0)[1] = f.getPoly().get(0)[1] - g.getPoly()
-			h.getPoly() = add(h, x);
-			f.getPoly() = f.getPoly() - multiply(g, h);
-		}*/
+			x.getPoly().get(0)[1] = f.getPoly().get(0)[1] - g.getPoly().get(0)[1];
+			h = add(x, h);
+			reduce(h);
+			
+			Poly newPoly = subtract(f, multiply(g, x));
+			reduce(newPoly);
 
-		Poly[] output = {h, g};
+			return divideHelper(newPoly, g, h);
+		}
+
+		Poly[] output = {h, f};
 		return output;
 
 	}
 
 	public Poly[] divide(Poly f, Poly g){
 
-		Poly[] output = new Poly[2];
 
 		// must have polynomials in reduced form. This ensures that
 		reduce(f);
 		reduce(g);
-		// temporary polynomial so g is not modified
-		Poly temp = new Poly(f.toString());
 
+		Poly h = new Poly("0x^0");
 
+		return divideHelper(f, g, h);
 
-		return output;
 	}
 
 
