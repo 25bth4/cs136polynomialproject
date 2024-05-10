@@ -255,6 +255,7 @@ public class Operations implements Interface<Poly>{
 		}
 		Poly fprime = new Poly(toString(result));
 
+
 		return fprime;
 	}
 
@@ -304,20 +305,50 @@ public class Operations implements Interface<Poly>{
 
 		ArrayList<float[]> windows = new ArrayList<float[]>();
 		
-		float largeNum = 0;
+		//float largeNum = 0;
 	/**	for(int i=0; i<f.getPoly().size(); i++){
 			largeNum = largeNum * f.getPoly().get(i)[0];
 		}
 		largeNum = Math.abs(largeNum);
-	*/	largeNum = 100000;
+	*///	largeNum = 1000000;
 //if f<0 at -infty, and first extrema is positive, then there is a zero before that extrema. similar for last extrema.
 //if two neighboring extrema are of oposite sign, then there is a zero between them.
+		float firstExpon = f.getPoly().get(0)[1];
+		float firstCoeff = f.getPoly().get(0)[0];
+		int parity = (int)firstExpon % 2; //0 if even, 1 if odd
+		float direction = firstCoeff/Math.abs(firstCoeff); //1 if positive, -1 if negative
+		float xtoNegInfty = 0;
+		float xtoPosInfty = 0;
+		if (parity == 0){
+			if(direction == 1){
+				xtoNegInfty = 1;
+				xtoPosInfty = 1;
+			}
+			if(direction == -1){
+				xtoNegInfty = -1;
+				xtoPosInfty = -1;
+			}
+		}
+		if (parity == 1){
+			if(direction == 1){
+				xtoNegInfty = -1;
+				xtoPosInfty = 1;
+			}
+			if(direction == -1){
+				xtoNegInfty = 1;
+				xtoPosInfty = -1;
+			}
+		}
 		
 
 		float firstExtrema = f.getExtrema().get(0);
-		if ((evaluate(f,firstExtrema))/Math.abs(evaluate(f,firstExtrema)) != evaluate(f,-largeNum)/Math.abs(evaluate(f,-largeNum)) ){		//if they are different signs
+		if ((evaluate(f,firstExtrema))/Math.abs(evaluate(f,firstExtrema)) != xtoNegInfty){		//if they are different signs
 			float[] window = new float[2];
-			window[0] = -largeNum;
+			float spot = firstExtrema;
+			while (evaluate(f, spot)/Math.abs(evaluate(f,spot)) != xtoNegInfty){
+				spot = spot -100;
+			}
+			window[0] = spot;
 			window[1] = firstExtrema;
 			windows.add(window);			
 		}
@@ -333,17 +364,19 @@ public class Operations implements Interface<Poly>{
 			}
 		}
 		float lastExtrema = f.getExtrema().get(n-1);
-		if ((evaluate(f,lastExtrema))/Math.abs(evaluate(f,lastExtrema)) != evaluate(f,largeNum)/Math.abs(evaluate(f,largeNum)) ){		//if they are different signs
+		if ((evaluate(f,lastExtrema))/Math.abs(evaluate(f,lastExtrema)) != xtoPosInfty ){		//if they are different signs
 			float[] window = new float[2];
+			float spot = lastExtrema;
+			while (evaluate(f, spot)/Math.abs(evaluate(f,spot)) != xtoPosInfty){
+				spot = spot +100;
+			}
 			window[0] = lastExtrema;
-			window[1] = largeNum;
+			window[1] = spot;
 			windows.add(window);
 		}
 
 		return windows;
 	}
-
-
 
 
 
@@ -377,12 +410,12 @@ public class Operations implements Interface<Poly>{
 		 
 		 	zeros.add(root);
 
-// 	f.getRoots().add(root);
+ 	f.getRoots().add(root);
 		 }
 //		 System.out.println("Roots of " + f.toString() + " are " + zeros.toString());
 //		 System.out.println("___");
-		 	return zeros;
-//	return f.getRoots();
+		 	//return zeros;
+	return f.getRoots();
 	}
 
 	public String strRoots(Poly f){
@@ -398,7 +431,7 @@ public class Operations implements Interface<Poly>{
 
 
 	public float bisectionMethod(float a, float b, Poly f, int count){
-		if (count ==1000) return (a+b)/2;
+		if (count ==9000) return (a+b)/2;
 		if (Math.abs(evaluate(f, (a+b)/2)) < Math.pow(10,-8)){
 			return (a+b)/2;
 		}
@@ -441,7 +474,6 @@ public class Operations implements Interface<Poly>{
 	public static void main(String args[]){
 
 	}
-
 
 
 }
