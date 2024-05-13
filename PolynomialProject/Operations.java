@@ -386,9 +386,17 @@ public class Operations implements Interface<Poly>{
 
 //base case, if the degree of the polynomial is 1, find the root
 		if (f.getPoly().get(0)[1]==1){
-			float root = -f.getPoly().get(1)[0]/f.getPoly().get(0)[0];
-			f.getRoots().add(root);
-			return f.getRoots();
+			if (f.getPoly().size() > 1){
+				float root = -f.getPoly().get(1)[0]/f.getPoly().get(0)[0];
+				f.getRoots().add(root);
+				return f.getRoots();
+			}
+			else {
+				float root = 0;
+				f.getRoots().add(root);
+				return f.getRoots();
+			}
+			
 		}
 
 		 ArrayList<float[]> windows = windowRoots(f);
