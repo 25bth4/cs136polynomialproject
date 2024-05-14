@@ -219,29 +219,58 @@ public class Operations implements Interface<Poly>{
 		reduce(g);
 		Poly a;
 		Poly b;
-		Poly h = new Poly("0x^0");
-
-		// Checks for zero polynomials
-		if (f.getPoly().get(0)[0] == 0f || f.getPoly().get(0)[0] == 0f){
-			return h;
-		}
 
 		// defines rank
-		if (f.getPoly().get(0)[1] < g.getPoly().get(0)[1]){
-			a = g;
-			b = f;
-		}
-		else{
+		if (f.getPoly().get(0)[1] <= g.getPoly().get(0)[1]){
 			a = f;
 			b = g;
 		}
+		else{
+			a = g;
+			b = f;
+		}
 
+		// Checks for zero polynomials
+		if (b.getPoly().get(0)[0] == 0f){
+			Poly h = new Poly("1x^0");
+			return h;
+		}
+		else if (a.getPoly().get(0)[0] == 0f){
+			return b;
+		}
 
+		Poly h = divide(b,a)[1];
+		Poly j = divide(b,a)[0];
+		reduce(h);
+		if (h.getPoly().get(0)[0] == 0){
+			ArrayList<Float> coeffs = new ArrayList<Float>();
+			if (j.getPoly().size() > 1){
 
-		return null;
+				for (int i = 0; i < a.getPoly().size(); i++){
+					coeffs.add(a.getPoly().get(i)[0]);
+				}
+				float commonCoeff = coeffs.get(0);
+				for (int i = 0; i < coeffs.size(); i++){
+					commonCoeff = euclidean(commonCoeff, coeffs.get(i));
+				}
+				if(commonCoeff != 1f){
+					String term = commonCoeff + "x^0";
+					Poly commonPoly = new Poly(term);
+					a = divide(a, commonPoly)[0];
+					reduce(a);
+				}
+			}
+			return a;
+		}
+
+		return commonDivisor(h,a);
 	}	
 
+	public float euclidean(float a, float b){
+		if (b == 0f) return a;
 
+		return euclidean(b, a%b);
+	}
 
 
 	public String toString(ArrayList<float[]> info) {

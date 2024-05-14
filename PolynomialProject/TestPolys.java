@@ -73,17 +73,16 @@ public class TestPolys {
 		System.out.println(f.toString());
 */
 
-        Poly testPoly1 = new Poly("3x^2 -6x^1 +3x^0");
-        Poly testPoly2 = new Poly("2x^3 +9x^1 -20x^0");
-        Poly zeroPoly = new Poly("0x^0");
+        Poly testPoly1 = new Poly("1x^2 +7x^1 +6x^0");
+        Poly testPoly2 = new Poly("1x^2 -5x^1 -6x^0");
+        Poly neg2Poly = new Poly("-2x^0");
 
-        Poly testPoly3 = new Poly("1x^1");
-        Poly testPoly4 = new Poly("3x^2 -2x^1 +1x^1");
+        Poly testPoly3 = new Poly("1x^1 +1x^0");
+        Poly testPoly4 = new Poly("1x^2 +2x^1 -1x^0");
 
-        ring.reduce(zeroPoly);
-        Poly[] output = ring.divide(testPoly4, testPoly3);
-        System.out.println(output[0].toString());
-        System.out.println(output[1].toString());
+        System.out.println(ring.commonDivisor(testPoly4, testPoly2));
+        //System.out.println(ring.commonDivisor(testPoly2, testPoly1));
+
 	}
 
 
