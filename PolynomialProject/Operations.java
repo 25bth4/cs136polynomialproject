@@ -394,41 +394,47 @@ public class Operations implements Interface<Poly>{
 		}
 		
 
-		float firstExtrema = f.getExtrema().get(0);
-		if ((evaluate(f,firstExtrema))/Math.abs(evaluate(f,firstExtrema)) != xtoNegInfty){		//if they are different signs
-			float[] window = new float[2];
-			float spot = firstExtrema;
-			while (evaluate(f, spot)/Math.abs(evaluate(f,spot)) != xtoNegInfty){
-				spot = spot -100;
-			}
-			window[0] = spot;
-			window[1] = firstExtrema;
-			windows.add(window);			
-		}
-		int n = f.getExtrema().size();
-		for (int i=1; i<n; i++){
-			float right = f.getExtrema().get(i);
-			float left = f.getExtrema().get(i-1);
-			if ((evaluate(f,left))/Math.abs(evaluate(f,left)) !=  (evaluate(f,right))/Math.abs(evaluate(f,right))){
+		try{
+			float firstExtrema = f.getExtrema().get(0);
+			if ((evaluate(f,firstExtrema))/Math.abs(evaluate(f,firstExtrema)) != xtoNegInfty){		//if they are different signs
 				float[] window = new float[2];
-				window[0] = left;
-				window[1] = right;
+				float spot = firstExtrema;
+				while (evaluate(f, spot)/Math.abs(evaluate(f,spot)) != xtoNegInfty){
+					spot = spot -100;
+				}
+				window[0] = spot;
+				window[1] = firstExtrema;
+				windows.add(window);			
+			}
+			int n = f.getExtrema().size();
+			for (int i=1; i<n; i++){
+				float right = f.getExtrema().get(i);
+				float left = f.getExtrema().get(i-1);
+				if ((evaluate(f,left))/Math.abs(evaluate(f,left)) !=  (evaluate(f,right))/Math.abs(evaluate(f,right))){
+					float[] window = new float[2];
+					window[0] = left;
+					window[1] = right;
+					windows.add(window);
+				}
+			}
+			float lastExtrema = f.getExtrema().get(n-1);
+			if ((evaluate(f,lastExtrema))/Math.abs(evaluate(f,lastExtrema)) != xtoPosInfty ){		//if they are different signs
+				float[] window = new float[2];
+				float spot = lastExtrema;
+				while (evaluate(f, spot)/Math.abs(evaluate(f,spot)) != xtoPosInfty){
+					spot = spot +100;
+				}
+				window[0] = lastExtrema;
+				window[1] = spot;
 				windows.add(window);
 			}
-		}
-		float lastExtrema = f.getExtrema().get(n-1);
-		if ((evaluate(f,lastExtrema))/Math.abs(evaluate(f,lastExtrema)) != xtoPosInfty ){		//if they are different signs
-			float[] window = new float[2];
-			float spot = lastExtrema;
-			while (evaluate(f, spot)/Math.abs(evaluate(f,spot)) != xtoPosInfty){
-				spot = spot +100;
-			}
-			window[0] = lastExtrema;
-			window[1] = spot;
-			windows.add(window);
-		}
 
-		return windows;
+			return windows;
+		}
+		catch(IndexOutOfBoundsException e){
+			System.out.println("\nThe derivatives are too stiff, please try another function");
+			return null;
+		}
 	}
 
 

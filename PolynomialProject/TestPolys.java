@@ -29,14 +29,17 @@ public class TestPolys {
 	        	continue;
 	        }
 	        if (command == 1){
-	        	System.out.println("Input polynomial: (example: 1x^7 +3x^2 -4x^1 -1x^0)");
-	        	String polynomial = scanner.nextLine();
-	        	Poly f = new Poly(polynomial);
-	        	System.out.println(ring.strRoots(f));
-	        	System.out.println("\n0: continue \n9: exit");
-	        	answer = scanner.nextLine();
-	        	command = Integer.valueOf(answer);
-	        	continue;
+	        	try{
+		        	System.out.println("Input polynomial: (example: 1x^7 +3x^2 -4x^1 -1x^0)");
+		        	String polynomial = scanner.nextLine();
+		        	Poly f = new Poly(polynomial);
+		        	System.out.println(ring.strRoots(f));
+		        }catch(NullPointerException e){
+		        }
+		        	System.out.println("\n0: continue \n9: exit");
+		        	answer = scanner.nextLine();
+		        	command = Integer.valueOf(answer);
+		        	continue;
 	        }
 	        if (command == 2){
 	        	System.out.println("Input polynomial: (example: 1x^7 +3x^2 -4x^1 -1x^0)");
