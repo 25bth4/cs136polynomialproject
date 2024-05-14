@@ -197,6 +197,7 @@ public class Operations implements Interface<Poly>{
 
 	}
 
+	// f/g
 	public Poly[] divide(Poly f, Poly g){
 
 
@@ -214,6 +215,29 @@ public class Operations implements Interface<Poly>{
 	// checks for largest common factor by the Euclidean Algorithm
 	// returns constant polynomial "1" if no common divisors.			 ** hard **
 	public Poly commonDivisor(Poly f, Poly g){
+		reduce(f);
+		reduce(g);
+		Poly a;
+		Poly b;
+		Poly h = new Poly("0x^0");
+
+		// Checks for zero polynomials
+		if (f.getPoly().get(0)[0] == 0f || f.getPoly().get(0)[0] == 0f){
+			return h;
+		}
+
+		// defines rank
+		if (f.getPoly().get(0)[1] < g.getPoly().get(0)[1]){
+			a = g;
+			b = f;
+		}
+		else{
+			a = f;
+			b = g;
+		}
+
+
+
 		return null;
 	}	
 
