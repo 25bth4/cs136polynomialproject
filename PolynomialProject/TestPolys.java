@@ -18,10 +18,10 @@ public class TestPolys {
         
 	    int command = 0;
 	    while(command != 9){
-	    	System.out.println("What would you like to do? Please type a number: \n1: Find Roots \n2: Differentiate Polynomial \n3: Integrate Polynomial  \n4: exit");
+	    	System.out.println("What would you like to do? Please type a number: \n1: Find Roots \n2: Differentiate Polynomial \n3: Integrate Polynomial \n4: CommonDivisor  \n5: exit");
 	        String answer = scanner.nextLine();
 	        command = Integer.valueOf(answer);
-	        if (command == 4){
+	        if (command == 5){
 	        	break;
 	        }
 	        if (command == 1){
@@ -32,7 +32,7 @@ public class TestPolys {
 		        	System.out.println(ring.strRoots(f));
 		        }catch(NullPointerException e){
 		        }
-		        	System.out.println("\n0: continue \n9: exit");
+		        	System.out.println("\n0: continue \n5: exit");
 		        	answer = scanner.nextLine();
 		        	command = Integer.valueOf(answer);
 		        	continue;
@@ -42,7 +42,21 @@ public class TestPolys {
 	        	String polynomial = scanner.nextLine();
 	        	Poly f = new Poly(polynomial);
 	        	System.out.println("f(x) = " + f.toString() + "\nf'(x) = " + ring.diff(f).toString());
-	        	System.out.println("\n0: continue \n9: exit");
+	        	System.out.println("\n0: continue \n5: exit");
+	        	answer = scanner.nextLine();
+	        	command = Integer.valueOf(answer);
+	        	continue;
+	        }
+
+	          if (command == 4){
+	        	System.out.println("Input polynomial 1: (example: 1x^7 +3x^2 -4x^1 -1x^0)");
+	        	String polynomial = scanner.nextLine();
+	        	Poly f = new Poly(polynomial);
+	        	System.out.println("Input polynomial 2: (example: 1x^7 +3x^2 -4x^1 -1x^0)");
+	        	String polynomial2 = scanner.nextLine();
+	        	Poly g = new Poly(polynomial2);
+	        	System.out.println("GCD = " + ring.commonDivisor(f, g).toString());
+	        	System.out.println("\n0: continue \n5: exit");
 	        	answer = scanner.nextLine();
 	        	command = Integer.valueOf(answer);
 	        	continue;
@@ -55,7 +69,7 @@ public class TestPolys {
 	        	System.out.println("Input intial condition at x=0");
 	        	float f0 = Float.valueOf(scanner.nextLine());
 	        	System.out.println("F(x) = " + ring.integrate(f, f0).toString());
-	        	System.out.println("\n0: continue \n9: exit");
+	        	System.out.println("\n0: continue \n5: exit");
 	        	answer = scanner.nextLine();
 	        	command = Integer.valueOf(answer);
 	        	continue;
@@ -92,7 +106,7 @@ public class TestPolys {
         Poly testPoly3 = new Poly("1x^1 +1x^0");
         Poly testPoly4 = new Poly("1x^2 +2x^1 -1x^0");
 
-        System.out.println(ring.commonDivisor(testPoly4, testPoly2));
+       // System.out.println(ring.commonDivisor(testPoly4, testPoly2));
         //System.out.println(ring.commonDivisor(testPoly2, testPoly1));
 
 	}
