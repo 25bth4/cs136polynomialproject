@@ -320,7 +320,17 @@ public class Operations implements Interface<Poly>{
 
 	// computes the integral of a polynomial given an intial condition for f(0)
 	public Poly integrate(Poly f, float f0){
-		return null;
+		Poly r = new Poly(f.toString());
+		for (int i=0; i<f.getPoly().size(); i++){
+			r.getPoly().get(i)[1] +=1;
+			r.getPoly().get(i)[0] = f.getPoly().get(i)[0]/r.getPoly().get(i)[1];
+		}
+		float[] newArray = new float[2];
+		newArray[0] = f0;
+		newArray[1] = 0;
+		r.getPoly().add(newArray);
+
+		return r;
 	}
 
 
